@@ -27,15 +27,15 @@ module.exports = function(router) {
         })
     })
 
-    router.route(URI).post(function(req, res, next){
-        console.log("Post Udemy courses");
-
+    router.route(URI).post((req, res, next) => {
+        console.log("Post Courses");
+    
         var doc = req.body;
-
-        db.save(doc, function(err, saved) {
-            if(err){
-                
-            }
-        })
-    })
-}
+    
+        db.save(doc, (err, saved) => {
+          if (err) {
+            res.status(400).send(err);
+          }
+        });
+      });
+    };

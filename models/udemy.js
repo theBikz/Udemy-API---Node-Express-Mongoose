@@ -15,8 +15,7 @@ var UdemySchema = settings.mongoose.Schema(
         language: String,
         prerequisite: { type: String, required: true },
         duration: { type: Number, required: true },
-        rating: Number,
-        pictures: { type: [String] }
+        rating: Number
     }
 );
 
