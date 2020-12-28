@@ -14,7 +14,7 @@ exports.saveMany = function(rows, callback) {
 }
 
 exports.update = function(criteria, doc, callback) {
-    model.Course.updateMany(criteria, doc, function(err, data){
+    model.Course.update(criteria, doc, function(err, data){
         callback(err, data)
     })
 }

@@ -19,4 +19,4 @@ var UdemySchema = settings.mongoose.Schema(
     }
 );
 
-exports.Course = settings.mongoose.model('udemy', UdemySchema);
+exports.Course = settings.mongoose.model("udemy", UdemySchema);

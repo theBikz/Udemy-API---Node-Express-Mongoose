@@ -11,13 +11,15 @@ db.save(SingleRow, function (err, saved) {
   }
 });
 
-// db.save(MultipleRows, function (err, saved) {
-//   if (err) {
-//     console.log("failed multiple rows save");
-//   } else {
-//     console.log("Success: Multiple rows - %s", saved.name);
-//   }
-// });
+db.saveMany(MultipleRows, function (err, docs) {
+  if (err) {
+    console.log("Failed multiple row insert");
+    //console.log(err)
+    //process.exit(1)
+  } else {
+    console.log("Success - Multiple rows inserted - %d", docs.length);
+  }
+});
 
 var selectCriteria = { duration: {$gte: 10} };
 db.select(selectCriteria, function (err, data) {
@@ -33,13 +35,13 @@ db.select(selectCriteria, function (err, data) {
   }
 });
 
-// var updateCriteria = { name: "BAHAMAS1000" };
-// var doc = { description: "Updated desc for testing" };
-// db.update(updateCriteria, doc, function (err, doc) {
-//   if (err) {
-//     console.log("Failed to get vupdate %s");
-//     console.log(err);
-//   } else {
-//     console.log("successfully updated criteria", updateCriteria);
-//   }
-// });
+var updateCriteria = { name: "PHP for Beginners - Become a PHP Master - CMS Project" };
+var doc = { description: "Updated desc for testing" };
+db.update(updateCriteria, doc, function (err, doc) {
+  if (err) {
+    console.log("Failed to get vupdate %s");
+    console.log(err);
+  } else {
+    console.log("successfully updated criteria", updateCriteria);
+  }
+});
