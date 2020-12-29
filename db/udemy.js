@@ -28,14 +28,14 @@ exports.update = function(criteria, doc, callback) {
 exports.select = function (criteria,options, callback) {
 
     // Local variable for capturing limit & offset
-    var lim = 0
-    var off = 0
+    var lim = 5
+    var off = 1
     if(options.pagination !== undefined){
         if(options.pagination.limit !== undefined)  lim = parseInt(options.pagination.limit)
         if(options.pagination.offset !== undefined)  off = parseInt(options.pagination.offset)
     }
 
-    model.Course.find(criteria,options, function (err, data) {
+    model.Course.find(criteria, function (err, data) {
         callback(err, data)
-    }).select(options.fields).limit(lim).skip(off)
+    }).select(options.fields).skip(off).limit(lim)
 }

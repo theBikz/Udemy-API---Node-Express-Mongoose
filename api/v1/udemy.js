@@ -29,10 +29,32 @@ module.exports = function(router) {
 
     router.route(URI).get(cache(10),function(req, res, next) {
         console.log("GET Udemy course");
-        
-        var criteria = { duration: {$gte: 10}}
+        //1. fields
+        var fields ={}
+        if(req.query && req.query.fields !== undefined){
+           fields =  createFields(req.query.fields)
+        }
 
-        db.select(criteria, function(err, docs) {
+        //2. paginations
+        var pagination = {limit:0, offset:0}
+        if(req.query && req.query.limit !== undefined){
+            // checks should be made that limit is a number
+            pagination.limit = req.query.limit
+        }
+        if(req.query && req.query.offset !== undefined){
+            // checks should be made that limit is a number
+            pagination.offset = req.query.offset
+        }
+
+        //2. Setup options
+        var options = {fields:fields, pagination:pagination}
+        console.log(options)
+
+        //3. execute the query
+        
+        var criteria = { duration: {$gte: 40}}
+
+        db.select(criteria,options, function(err, docs) {
             if(err) {
               var userError = processMongooseErrors(apiMessages.errors.API_MESSAGE_CREATE_FAILED, "GET", URI, err,{});
               res.setHeader('content-type', 'application/json')
