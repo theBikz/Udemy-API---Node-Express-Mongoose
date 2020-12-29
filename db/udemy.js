@@ -14,13 +14,28 @@ exports.saveMany = function(rows, callback) {
 }
 
 exports.update = function(criteria, doc, callback) {
-    model.Course.update(criteria, doc, function(err, data){
+    model.Course.updateOne(criteria, doc, function(err, data){
         callback(err, data)
     })
 }
 
-exports.select = function(criteria, callback) {
-    model.Course.find(criteria, function(err, data) {
+// exports.select = function(criteria, callback) {
+//     model.Course.find(criteria, function(err, data) {
+//         callback(err, data)
+//     })
+// }
+
+exports.select = function (criteria,options, callback) {
+
+    // Local variable for capturing limit & offset
+    var lim = 0
+    var off = 0
+    if(options.pagination !== undefined){
+        if(options.pagination.limit !== undefined)  lim = parseInt(options.pagination.limit)
+        if(options.pagination.offset !== undefined)  off = parseInt(options.pagination.offset)
+    }
+
+    model.Course.find(criteria,options, function (err, data) {
         callback(err, data)
-    })
+    }).select(options.fields).limit(lim).skip(off)
 }

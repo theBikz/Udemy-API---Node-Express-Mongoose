@@ -45,3 +45,17 @@ db.update(updateCriteria, doc, function (err, doc) {
     console.log("successfully updated criteria", updateCriteria);
   }
 });
+
+// var selectCriteriaNew = {}
+//     var options = {fields:{name:1,type:1,city:1}}
+//     db.select(selectCriteriaNew, options, function (err, data) {
+//         if (err) {
+//             console.log("Failed to get courses : %s", selectCriteriaNew)
+//             console.log(err)
+//             process.exit(1)
+//         } else {
+//             console.log("Successfully selected %d documents for %s", data.length, JSON.stringify(selectCriteriaNew))
+//             console.log(data)
+//             process.exit(0)
+//         }
+//     });
